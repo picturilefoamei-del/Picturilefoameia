@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "echo 'Dev mode not needed'",
-    "build": "mkdir -p public && echo '<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><title>Picturile foamei</title></head><body><div id=\"root\"></div><script type=\"module\" src=\"/App.jsx\"></script></body></html>' > public/index.html"
+    "build": "echo 'Build not needed for single-file app'"
   },
   "dependencies": {
     "react": "^18.3.1",
