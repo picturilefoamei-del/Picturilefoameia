@@ -2,8 +2,8 @@
   "name": "picturilefoamei",
   "version": "1.0.0",
   "scripts": {
-    "dev": "echo 'Development not needed'",
-    "build": "echo 'Build not needed for single-file app'"
+    "dev": "echo 'Dev mode not needed'",
+    "build": "mkdir -p public && echo '<!DOCTYPE html><html><head><title>Picturile foamei</title></head><body><div id=\"root\"></div><script src=\"/App.jsx\" type=\"module\"></script></body></html>' > public/index.html"
   },
   "dependencies": {
     "react": "^18.3.1",
