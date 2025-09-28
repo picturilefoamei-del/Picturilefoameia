@@ -2,11 +2,7 @@
   "name": "picturilefoamei",
   "version": "1.0.0",
   "scripts": {
-    "dev": "echo 'Dev mode not needed'",
-    "build": "echo 'Build not needed for single-file app'"
-  },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "dev": "echo 'No dev server needed'",
+    "build": "echo 'No build needed'"
   }
 }
