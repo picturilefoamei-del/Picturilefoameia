@@ -1,13 +1,452 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Picturile foamei</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Picturile foamei</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gray: {
+              900: '#111827',
+              800: '#1f2937',
+              700: '#374151',
+              600: '#4b5563',
+              500: '#6b7280',
+              400: '#9ca3af',
+              300: '#d1d5db',
+              200: '#e5e7eb',
+              100: '#f3f4f6',
+              50: '#f9fafb'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .fade-in { animation: fadeIn 0.3s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 transition-colors duration-300" id="body">
+  <div id="app" class="fade-in">
+    <!-- Loading... -->
+  </div>
+
+  <script>
+    // =============== CONFIGURATION ===============
+    const translations = {
+      ro: {
+        healthResearch: "Cercetare Științifică",
+        backToMain: "Înapoi la Principal",
+        backToHome: "Înapoi la Acasă",
+        backToGallery: "Înapoi la Galerie",
+        picturileFoamei: "Picturile foamei",
+        galleryOnline: "Galeria Online",
+        rentPaintings: "Închiriere picturi",
+        mission: "Misiunea Noastră",
+        theChallenge: "Provocarea",
+        theSolution: "Soluția Noastră",
+        europePoorest: "Eradicarea sărăciei în una dintre cele mai sărace țări din Europa",
+        artistsCardboard: "Artiștii pictează fără profit sau ajung să tatueze pentru că le este foame, altă artă nu ar fi recompensată financiar imediat.",
+        limitedAccess: "Milioane de cetățeni români nu au cumpărat sau închiriat în viața lor o pictură",
+        mentalHealthPoverty: "Sănătate mintală afectată de sărăcie",
+        affordableRental: "Închiriere accesibilă de artă",
+        freeMaterials: "Material de pictură gratuit",
+        communityGardens: "Grădini comunitare",
+        realEstateInvestments: "Investiții imobiliare",
+        heroText: "Picturile foamei: Opere de artă exclusive închiriate în numele sănătății și egalității sociale.",
+        rentPainting: "Închiriere pictură",
+        picturileFoameiOffers: "Picturile foamei oferă:",
+        rentArtworks: "Închiriere opere de artă ⌛",
+        investsRealEstate: "Picturile foamei investește pentru tine în proprietăți imobiliare!",
+        understandRenting: "Înțelegi ce înseamnă să închiriezi.",
+        understandOwning: "Înțelegi ce înseamnă să deții o proprietate.",
+        butYouHesitated: "Dar ai ezitat pentru că:",
+        traditionalInvestments: "Investițiile tradiționale par inaccesibile.",
+        dontKnowWhere: "Nu știi de unde să începi.",
+        notSureWorth: "Nu ești sigur dacă merită efortul.",
+        hereIsAlternative: "Iată alternativa:",
+        rentPaintingLike: "Închiriază o pictură (așa cum ai face cu o mașină sau un apartament).",
+        donationsBecomeEquity: "O parte din fiecare donație se transformă în capital propriu imobiliar.",
+        ownTangibleAssets: "Deține active tangibile în timp - fără speculații, fără bilete la loterie.",
+        notQuickRich: "Nu este vorba de „îmbogățire rapidă”.",
+        inevitableRich: "Este „îmbogățire inevitabilă”.",
+        actNow: "**Acționează acum, nu regreta mai târziu.**",
+        onlineGallery: "Galeria Online",
+        collectionI: "Colecția I: Picturi 1-100",
+        collectionII: "Colecția II: Picturi 101-200",
+        collectionIII: "Colecția III: Picturi 201-300",
+        collectionIV: "Colecția IV: Picturi 301-400",
+        collectionV: "Colecția V: Picturi 401-500",
+        quickNavigation: "Navigare Rapidă",
+        originalPaintings: "picturi originale cu poezie • Format A3",
+        completeCollection: "Colecția completă de 500 de picturi originale",
+        scientificEvidence: "Dovezi Științifice: Artă & Sănătate Mintală",
+        healingPower: "Puterea Vindecătoare a Artei Vizuale",
+        scientificStudies: "Studii Științifice",
+        essentialBooks: "Cărți Esențiale despre Artă & Vindecare",
+        mediaCoverage: "Acoperire Media & Articole de Știri",
+        conclusion: "Concluzie",
+        allStudiesCited: "Toate studiile și sursele citate provin din jurnale peer-reviewed și publicații de renume.",
+        artPoetryCommunity: "Artă, poezie și sprijin comunitar în București, România.",
+        navigation: "Navigare",
+        gardens: "Grădini",
+        invest: "Investește",
+        followUs: "Urmărește Picturile foamei!",
+    contact: "Contact",
+        copyright: "© 2024 Picturile foamei",
+        paintingDetails: "Detalii Pictură",
+        donateToRent: "Donează pentru a închiria",
+        immediatePainting: "Pictură imediat",
+        whatsIncluded: "Ce este Inclus",
+        rentalTerms: "Termeni de Închiriere",
+        whyRentArt: "De ce să închiriezi artă?",
+        originalCertificate: "Pictură originală cu certificat de autenticitate",
+        professionalFraming: "Cadru profesional și accesorii de agățare",
+        insuranceCoverage: "Asigurare împotriva daunelor",
+        originalPoem: "Poezie originală tipărită pe hârtie premium",
+        minimumRental: "Perioadă minimă de închiriere: 1 lună",
+        freeDelivery: "Livrare și ridicare gratuită în București",
+        rentalFeesSupport: "10% din taxele de închiriere sprijină materialele gratuite de artă",
+        easyRenewal: "Proces ușor de reînnoire sau returnare",
+        makesArtAccessible: "Închirierea artei face opera originală accesibilă tuturor.",
+        supportsLocalArtists: "Sprijină artiștii locali, aduce frumusețea în spațiul tău,",
+        contributesHealing: "și contribuie la vindecarea comunității prin expresie creativă.",
+        allPaintings: "Toate Picturile",
+        nature: "Natură",
+        urban: "Urban",
+        gardens: "Grădini",
+        rural: "Rural",
+        donateToRentTitle: "Donează pentru a închiria",
+        supportOurMission: "Sprijină Misiunea Noastră",
+        createNonProfit: "Creăm o organizație non-profit care creează și închiriază artă",
+        artistsCannotAfford: "Artiști care nu-și permit să picteze, dar doresc cu adevărat",
+        artMakesGood: "Pentru că arta face binele",
+        yourDonationHelps: "Donația ta ajută la:",
+        provideFreeMaterials: "Furnizarea de materiale gratuite de pictură",
+        supportArtists: "Sprijinirea artiștilor care pictează pe carton și gunoi",
+        createNewArt: "Crearea de artă nouă pentru închiriere",
+        buildCommunity: "Construirea unei comunități creative și vindecătoare",
+        everyDonationMatters: "Fiecare donație contează",
+        joinOurMovement: "Alătură-te mișcării noastre pentru artă accesibilă",
+        shareOnFacebook: "Distribuie pe Facebook",
+        shareOnInstagram: "Distribuie pe Instagram",
+        visitYouTube: "Vizitează canalul YouTube",
+        immediatePaintingTitle: "Pictură Imediat",
+        immediateDelivery: "Livrare urgentă în București",
+        donationAmount: "45 lei (inclusiv livrare)",
+        rentalPeriod: "Perioadă de închiriere: 30 de zile",
+        immediateBenefits: "Beneficii pentru sănătate mintală:",
+        artReducesStress: "Arta reduce stresul și anxietatea",
+        enhancesMood: "Îmbunătățește dispoziția și motivația",
+        triggersMemories: "Activează amintiri plăcute și vindecătoare",
+        disclaimerTitle: "AVERTISMENT IMPORTANT",
+        disclaimerText: "Pictură imediat NU înlocuiește numărul de urgență 112, NU înlocuiește o dietă echilibrată cu legume proaspete și utilizatorul trebuie să verifice nivelul de hidratare. Consumul de apă este esențial. Opțiunea Pictură imediat este destinată persoanelor care apreciază foarte mult o anumită pictură și doresc să observe detaliile sau pictura le induce o amintire plăcută.",
+        enjoyArt: "Bucură-te de artă în mod responsabil!",
+        sendSMS: "Trimite SMS",
+        orderViaSMS: "Comandă prin SMS"
+      },
+      en: {
+        healthResearch: "Health Research",
+        backToMain: "Back to Main Site",
+        backToHome: "Back to Home",
+        backToGallery: "Back to Gallery",
+        picturileFoamei: "Picturile foamei",
+        galleryOnline: "Online Gallery",
+        rentPaintings: "Rent Paintings",
+        mission: "Our Mission",
+        theChallenge: "The Challenge",
+        theSolution: "Our Solution",
+        europePoorest: "Eradicating poverty in one of the most poor countries in Europe",
+        artistsCardboard: "Artists paint without profit or end up tattooing because they are hungry, as other art wouldn't be financially rewarded immediately.",
+        limitedAccess: "Millions of Romanian citizens have never bought or rented a painting in their lifetime",
+        mentalHealthPoverty: "Mental health affected by poverty",
+        affordableRental: "Affordable art rental",
+        freeMaterials: "Free painting materials",
+        communityGardens: "Community gardens",
+        realEstateInvestments: "Real estate investments",
+        heroText: "Picturile foamei: Exclusive artworks rented in the name of health and social equality.",
+        rentPainting: "Rent Painting",
+        picturileFoameiOffers: "Picturile foamei offers:",
+        rentArtworks: "Rent artworks ⌛",
+        investsRealEstate: "Picturile foamei invests for you in real estate!",
+        understandRenting: "You understand what it means to rent.",
+        understandOwning: "You understand what it means to own property.",
+        butYouHesitated: "But you hesitated because:",
+        traditionalInvestments: "Traditional investments seem inaccessible.",
+        dontKnowWhere: "You don't know where to start.",
+        notSureWorth: "You're not sure if it's worth the effort.",
+        hereIsAlternative: "Here's the alternative:",
+        rentPaintingLike: "Rent a painting (just like you would with a car or apartment).",
+        donationsBecomeEquity: "Part of every donation becomes real estate equity.",
+        ownTangibleAssets: "Own tangible assets over time - no speculation, no lottery tickets.",
+        notQuickRich: "This is not about 'getting rich quick'.",
+        inevitableRich: "It's about 'inevitable enrichment'.",
+        actNow: "**Act now, don't regret later.**",
+        onlineGallery: "Online Gallery",
+        collectionI: "Collection I: Paintings 1-100",
+        collectionII: "Collection II: Paintings 101-200",
+        collectionIII: "Collection III: Paintings 201-300",
+        collectionIV: "Collection IV: Paintings 301-400",
+        collectionV: "Collection V: Paintings 401-500",
+        quickNavigation: "Quick Navigation",
+        originalPaintings: "original paintings with poetry • A3 Format",
+        completeCollection: "Complete collection of 500 original paintings",
+        scientificEvidence: "Scientific Evidence: Art & Mental Health",
+        healingPower: "The Healing Power of Visual Art",
+        scientificStudies: "Scientific Studies",
+        essentialBooks: "Essential Books on Art & Healing",
+        mediaCoverage: "Media Coverage & News Articles",
+        conclusion: "Conclusion",
+        allStudiesCited: "All studies and sources cited are from peer-reviewed journals and reputable publications.",
+        artPoetryCommunity: "Art, poetry, and community support in Bucharest, Romania.",
+        navigation: "Navigation",
+        gardens: "Gardens",
+        invest: "Invest",
+        followUs: "Follow Picturile foamei!",
+        contact: "Contact",
+        copyright: "© 2024 Picturile foamei",
+        paintingDetails: "Painting Details",
+        donateToRent: "Donate to Rent",
+        immediatePainting: "Immediate Painting",
+        whatsIncluded: "What's Included",
+        rentalTerms: "Rental Terms",
+        whyRentArt: "Why Rent Art?",
+        originalCertificate: "Original painting with certificate of authenticity",
+        professionalFraming: "Professional framing and hanging hardware",
+        insuranceCoverage: "Insurance coverage against damage",
+        originalPoem: "Original poem printed on premium paper",
+        minimumRental: "Minimum rental period: 1 month",
+        freeDelivery: "Free delivery and pickup within Bucharest",
+        rentalFeesSupport: "10% of rental fees support free art materials",
+        easyRenewal: "Easy renewal or return process",
+        makesArtAccessible: "Renting art makes original artwork accessible to everyone.",
+        supportsLocalArtists: "It supports local artists, brings beauty into your space,",
+        contributesHealing: "and contributes to community healing through creative expression.",
+        allPaintings: "All Paintings",
+        nature: "Nature",
+        urban: "Urban",
+        gardens: "Gardens",
+        rural: "Rural",
+        donateToRentTitle: "Donate to Rent",
+        supportOurMission: "Support Our Mission",
+        createNonProfit: "We're creating a non-profit organization that creates and rents art",
+        artistsCannotAfford: "Artists who cannot afford to paint, but truly want to",
+        artMakesGood: "Because art makes good",
+        yourDonationHelps: "Your donation helps with:",
+        provideFreeMaterials: "Providing free painting materials",
+        supportArtists: "Supporting artists who paint on cardboard and trash",
+        createNewArt: "Creating new art for rental",
+        buildCommunity: "Building a creative and healing community",
+        everyDonationMatters: "Every donation matters",
+        joinOurMovement: "Join our movement for accessible art",
+        shareOnFacebook: "Share on Facebook",
+        shareOnInstagram: "Share on Instagram",
+        visitYouTube: "Visit YouTube channel",
+        immediatePaintingTitle: "Immediate Painting",
+        immediateDelivery: "Urgent delivery in Bucharest",
+        donationAmount: "45 lei (including delivery)",
+        rentalPeriod: "Rental period: 30 days",
+        immediateBenefits: "Mental health benefits:",
+        artReducesStress: "Art reduces stress and anxiety",
+        enhancesMood: "Enhances mood and motivation",
+        triggersMemories: "Triggers pleasant and healing memories",
+        disclaimerTitle: "IMPORTANT WARNING",
+        disclaimerText: "Immediate Painting does NOT replace emergency number 112, does NOT replace a balanced diet with fresh vegetables, and the user should check hydration levels. Water consumption is essential. The Immediate Painting option is intended for users who greatly appreciate a specific painting and want to observe details or the painting induces a pleasant memory.",
+        enjoyArt: "Enjoy art responsibly!",
+        sendSMS: "Send SMS",
+        orderViaSMS: "Order via SMS"
+      }
+    };
+
+    // =============== STATE ===============
+    let state = {
+      darkMode: false,
+      currentPage: 'home',
+      selectedPainting: null,
+      language: 'ro'
+    };
+    
+        // =============== UTILS ===============
+    function toggleDarkMode() {
+      state.darkMode = !state.darkMode;
+      document.getElementById('body').className = state.darkMode 
+        ? 'bg-gray-900 text-gray-100 transition-colors duration-300' 
+        : 'bg-gray-50 text-gray-900 transition-colors duration-300';
+      render();
+    }
+
+    function toggleLanguage() {
+      state.language = state.language === 'ro' ? 'en' : 'ro';
+      render();
+    }
+
+    function t(key) {
+      return translations[state.language][key] || key;
+    }
+
+    // =============== PAINTINGS ===============
+    function generatePaintings() {
+      const categories = ['nature', 'urban', 'gardens', 'rural'];
+      const titles = ['Whispers of Dawn', 'Urban Dreams', 'Ocean\'s Embrace', 'Mountain Solitude', 'City Lights'];
+      const poems = ["Morning light breaks through the night...", "Concrete jungles bloom with grace..."];
+      const paintings = [];
+      for (let i = 1; i <= 500; i++) {
+        paintings.push({
+          id: i,
+          title: `${titles[i % titles.length]} ${i}`,
+          poem: poems[i % poems.length],
+          category: categories[i % categories.length],
+          dimensions: "29.7x42 cm",
+          year: 2023 + (i % 2)
+        });
+      }
+      return paintings;
+    }
+
+    const allPaintings = generatePaintings();
+
+    // =============== RENDERING ===============
+    function render() {
+      const app = document.getElementById('app');
+      if (state.currentPage === 'home') {
+        app.innerHTML = renderHomePage();
+      } else if (state.currentPage === 'gallery') {
+        app.innerHTML = renderGalleryPage();
+      } else if (state.selectedPainting) {
+        app.innerHTML = renderPaintingDetail(state.selectedPainting);
+      }
+      // Add event listeners after render
+      setTimeout(() => {
+        document.querySelectorAll('[data-action]').forEach(el => {
+          const action = el.getAttribute('data-action');
+          if (action === 'toggleDark') el.onclick = toggleDarkMode;
+          else if (action === 'toggleLang') el.onclick = toggleLanguage;
+          else if (action === 'goHome') { el.onclick = () => { state.currentPage = 'home'; state.selectedPainting = null; render(); }; }
+          else if (action === 'goGallery') { el.onclick = () => { state.currentPage = 'gallery'; state.selectedPainting = null; render(); }; }
+          else if (action.startsWith('viewPainting')) {
+            const id = parseInt(action.split(':')[1]);
+            el.onclick = () => { state.selectedPainting = allPaintings.find(p => p.id === id); render(); };
+          }
+        });
+      }, 10);
+    }
+
+    // =============== TEMPLATES ===============
+    function renderHomePage() {
+      return `
+        <header class="py-6 px-6 border-b ${state.darkMode ? 'border-gray-700' : 'border-gray-200'}">
+          <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-light">${t('picturileFoamei')}</h1>
+            <div class="flex items-center space-x-4">
+              <button data-action="goHealth" class="text-sm font-medium ${state.darkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'}">
+                ${t('healthResearch')}
+              </button>
+              <div class="flex items-center space-x-2">
+                <button data-action="toggleLang" class="p-2 rounded ${state.darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-700'}">
+                  <i class="fas fa-globe"></i>
+                </button>
+                <button data-action="toggleDark" class="p-3 rounded ${state.darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-700'}">
+                  <i class="fas fa-${state.darkMode ? 'sun' : 'moon'}"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <section class="py-20 px-6">
+          <div class="max-w-4xl mx-auto text-center">
+            <div class="p-8 rounded-lg ${state.darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}">
+              <h2 class="text-3xl md:text-4xl font-light leading-relaxed">
+                ${t('heroText')}
+              </h2>
+            </div>
+            <div class="flex justify-center space-x-4 mt-8">
+              <button data-action="goGallery" class="px-6 py-3 text-sm font-medium border flex items-center space-x-2 ${state.darkMode ? 'border-gray-600 hover:bg-gray-800' : 'border-gray-300 hover:bg-gray-100'}">
+                <i class="fas fa-th"></i>
+                <span>${t('galleryOnline')}</span>
+              </button>
+              <button class="px-6 py-3 text-sm font-medium ${state.darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-800 text-white hover:bg-gray-900'}">
+                ${t('rentPaintings')}
+              </button>
+            </div>
+          </div>
+        </section>
+        <footer class="py-12 px-6 border-t ${state.darkMode ? 'border-gray-800' : 'border-gray-200'}">
+          <div class="max-w-6xl mx-auto text-center text-sm">
+            ${t('copyright')}
+          </div>
+        </footer>
+      `;
+    }
+
+    function renderGalleryPage() {
+      const paintings = allPaintings.slice(0, 20); // Show first 20 for demo
+      return `
+        <header class="py-6 px-6 border-b ${state.darkMode ? 'border-gray-700' : 'border-gray-200'}">
+          <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <button data-action="goHome" class="flex items-center space-x-2 text-sm font-medium ${state.darkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'}">
+              <i class="fas fa-arrow-left"></i>
+              <span>${t('backToHome')}</span>
+            </button>
+            <h1 class="text-2xl font-light">${t('onlineGallery')}</h1>
+          </div>
+        </header>
+        <main class="max-w-7xl mx-auto px-6 py-8">
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            ${paintings.map(p => `
+              <div data-action="viewPainting:${p.id}" class="cursor-pointer group rounded-lg p-3 border ${state.darkMode ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' : 'bg-white border-gray-200 hover:bg-gray-50'}">
+                <div class="w-full h-48 ${state.darkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center mb-2">
+                  <i class="fas fa-palette text-2xl ${state.darkMode ? 'text-gray-500' : 'text-gray-400'}"></i>
+                </div>
+                <h3 class="font-medium text-sm mb-1">${p.title}</h3>
+                <p class="text-xs ${state.darkMode ? 'text-gray-400' : 'text-gray-600'}">${p.dimensions}</p>
+              </div>
+            `).join('')}
+          </div>
+        </main>
+      `;
+    }
+
+    function renderPaintingDetail(painting) {
+      return `
+      <header class="py-6 px-6 border-b ${state.darkMode ? 'border-gray-700' : 'border-gray-200'}">
+          <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <button data-action="goGallery" class="flex items-center space-x-2 text-sm font-medium ${state.darkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-600 hover:text-gray-900'}">
+              <i class="fas fa-arrow-left"></i>
+              <span>${t('backToGallery')}</span>
+            </button>
+            <h1 class="text-lg font-light">${t('paintingDetails')}</h1>
+          </div>
+        </header>
+        <main class="max-w-4xl mx-auto px-6 py-12">
+          <div class="grid md:grid-cols-2 gap-12">
+            <div class="p-8 rounded-lg ${state.darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'}">
+              <div class="w-full h-96 ${state.darkMode ? 'bg-gray-700' : 'bg-gray-200'} rounded-lg flex items-center justify-center mb-6">
+                <i class="fas fa-palette text-4xl ${state.darkMode ? 'text-gray-500' : 'text-gray-400'}"></i>
+              </div>
+              <h2 class="text-2xl font-light mb-2">${painting.title}</h2>
+              <p class="text-sm mb-2 ${state.darkMode ? 'text-gray-400' : 'text-gray-600'}">${painting.dimensions}</p>
+              <p class="italic mb-6 ${state.darkMode ? 'text-gray-300' : 'text-gray-700'}">"${painting.poem}"</p>
+              <button class="px-6 py-2 text-sm font-medium ${state.darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-800 text-white hover:bg-gray-900'}">
+                ${t('donateToRent')}
+              </button>
+            </div>
+          </div>
+        </main>
+      `;
+    }
+
+    // =============== INIT ===============
+    render();
+  </script>
+</body>
 </html>
